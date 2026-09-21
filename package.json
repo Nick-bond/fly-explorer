@@ -2,8 +2,10 @@
   "name": "flyexplorer",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "python3 -m http.server 5173"
+    "room": "npm --prefix room run dev",
+    "brain": "python3 -m brain.server.server",
+    "preprocess": "python3 -m brain.preprocess.build_brain",
+    "validate": "python3 -m brain.validate_dynamics"
   }
 }

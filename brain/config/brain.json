@@ -1,0 +1,45 @@
+{
+  "dataset": {
+    "name": "FAFB",
+    "version": "codex-princeton-export"
+  },
+
+  "preprocess": {
+    "minSynapses": 5,
+    "transmitterEffects": {
+      "ACH": 1.0,
+      "GABA": -1.0,
+      "GLUT": -1.0,
+      "DA": 0.0,
+      "SER": 0.0,
+      "OCT": 0.0
+    }
+  },
+
+  "simulation": {
+    "dt": 0.01,
+    "decay": 0.90,
+    "inputScale": 0.05,
+    "globalWeightScale": 0.01,
+    "maxStepsPerUpdate": 10,
+    "seed": 42
+  },
+
+  "vision": {
+    "width": 16,
+    "height": 16,
+    "luminanceGain": 1.0,
+    "temporalGain": 2.0,
+    "loomingGain": 40.0
+  },
+
+  "motor": {
+    "smoothing": 0.2,
+    "forwardGain": 4.0,
+    "yawGain": 8.0,
+    "verticalGain": 4.0,
+    "lateralGain": 4.0,
+    "brakeGain": 2.0,
+    "escapeGain": 4.0
+  }
+}
