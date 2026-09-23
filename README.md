@@ -16,10 +16,9 @@ Emergent phototaxis: with body speeds rescaled to what the sensorimotor
 loop can process, the connectome-driven fly climbs toward the ceiling
 light and circles it — no scripted behavior anywhere.
 
-<video src="public/fly-explorer-demo.mp4" controls width="720"></video>
+![Fly Explorer demo — the fly circles the ceiling light](public/fly-explorer-demo.gif)
 
-If the player doesn't render here, open
-[public/fly-explorer-demo.mp4](public/fly-explorer-demo.mp4) directly.
+Full-quality video: [public/fly-explorer-demo.mp4](public/fly-explorer-demo.mp4)
 
 ```
 room/        the ENVIRONMENT — TypeScript + Vite + raw WebGL
