@@ -10,6 +10,17 @@ movement emerges from connectome activity.
 - **SPEC.md** — Fly Brain + Data Specification v0.1 (the governing spec)
 - **PROTOCOL.md** — the brain ⇄ environment wire format (v2)
 
+## Demo
+
+Emergent phototaxis: with body speeds rescaled to what the sensorimotor
+loop can process, the connectome-driven fly climbs toward the ceiling
+light and circles it — no scripted behavior anywhere.
+
+<video src="public/fly-explorer-demo.mp4" controls width="720"></video>
+
+If the player doesn't render here, open
+[public/fly-explorer-demo.mp4](public/fly-explorer-demo.mp4) directly.
+
 ```
 room/        the ENVIRONMENT — TypeScript + Vite + raw WebGL
 brain/       the BRAIN — Python: FlyWire graph + neural simulation
@@ -99,10 +110,13 @@ Console: `window.flyexplorer` exposes `env`, `brain`, `camera`, `mapper`.
   velocity — the fly can reverse, change direction, stop and restart.
 - Escape maps to a retreat burst (backward + upward), mirroring the
   Giant Fiber jump away from a looming stimulus.
-- Limits (experimental, keep consistent across runs): max forward 2 m/s,
-  vertical 1 m/s, yaw rate 500°/s, pitch ±80°.
-- Collisions: all 13 solids; by impact speed — < 0.3 m/s soft contact,
-  < 1.0 m/s minor collision, above lethal.
+- Limits (experimental, keep consistent across runs): max forward
+  0.5 m/s, vertical 0.3 m/s, yaw rate 500°/s, pitch ±80°. Speeds are
+  sized to the sensorimotor loop: ~2-5 cm traveled per ~50-100 ms neural
+  reaction (indoor Drosophila cruise is ~0.2-0.7 m/s).
+- Collisions: all 13 solids; by impact speed — < 0.1 m/s soft contact,
+  < 0.35 m/s minor collision, above lethal. A full-speed impact kills;
+  braking before surfaces is what keeps the fly alive.
 - Vision: two eyes (~1 mm apart, 160° FOV, 64 × 64 RGBA each), rendered
   offscreen; the fly never sees its own body, and the brain never sees
   the spectator camera.

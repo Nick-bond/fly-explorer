@@ -15,27 +15,31 @@ const DEG = Math.PI / 180;
 
 // Physics tuning. Drag values are "per tick" at 60 Hz, applied
 // frame-rate-independently as drag^(dt*60).
-const THRUST_ACCEL = 4.0;   // m/s² at full forward/backward thrust
-const STRAFE_ACCEL = 3.0;   // m/s² at full sideways thrust
-const LIFT_ACCEL = 3.0;     // m/s² at full vertical thrust
+const THRUST_ACCEL = 1.5;   // m/s² at full forward/backward thrust
+const STRAFE_ACCEL = 1.0;   // m/s² at full sideways thrust
+const LIFT_ACCEL = 1.0;     // m/s² at full vertical thrust
 const TURN_STRENGTH = 12.0; // rad/s² at full yaw/pitch torque
 const LINEAR_DRAG = 0.98;
 const ANGULAR_DRAG = 0.95;
 const BRAKE_DRAG = 0.88;    // additional per-tick damping at full brake
 
-// Movement limits — experimental values, not biology. Keep them
-// consistent across runs so the neural network trains against a fixed world.
-const MAX_FORWARD_SPEED = 2.0;    // m/s, horizontal
-const MAX_VERTICAL_SPEED = 1.0;   // m/s
+// Movement limits — experimental values, not biology, sized so the
+// sensorimotor loop can keep up: at 0.5 m/s the fly travels ~2-5 cm per
+// ~50-100 ms neural reaction, instead of outrunning its own perception.
+// (Indoor Drosophila cruise is ~0.2-0.7 m/s.) Keep them consistent
+// across runs so the network trains against a fixed world.
+const MAX_FORWARD_SPEED = 0.5;    // m/s, horizontal
+const MAX_VERTICAL_SPEED = 0.3;   // m/s
 const MAX_YAW_RATE = 500 * DEG;   // rad/s
 const MAX_PITCH_RATE = 500 * DEG; // rad/s
 const MAX_PITCH = 80 * DEG;       // rad
 
-// Collision severity by impact speed (velocity into the surface, m/s):
-// below SOFT it's soft contact, up to MINOR it's a minor collision,
-// above that it is lethal.
-const SOFT_IMPACT = 0.3;
-const MINOR_IMPACT = 1.0;
+// Collision severity by impact speed (velocity into the surface, m/s),
+// scaled to the speed envelope: gentle contact is survivable, a
+// full-speed impact (0.35+ of the 0.5 max) is lethal — so braking
+// before a surface is what keeps the fly alive.
+const SOFT_IMPACT = 0.1;
+const MINOR_IMPACT = 0.35;
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 
